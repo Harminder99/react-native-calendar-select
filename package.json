@@ -1,11 +1,11 @@
 {
   "name": "react-native-calendar-select",
-  "version": "0.1.2",
-  "description": "Calendar select component for react-native, like Airbnb.",
+  "version": "0.2",
+  "description": "Calendar select component for react-native, like Airbnb using native-base.",
   "main": "./Calendar.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Tinysymphony/react-native-calendar-select.git"
+    "url": "git+https://github.com/Harminder99/react-native-calendar-select.git"
   },
   "scripts": {
     "start": "react-native start",
