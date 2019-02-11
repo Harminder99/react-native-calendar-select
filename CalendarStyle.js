@@ -1,9 +1,6 @@
-import {
-  StyleSheet,
-  Dimensions
-} from 'react-native';
+import { StyleSheet, Dimensions } from "react-native";
 const TEXT_FONT = "Avenir";
-const {scale, width} = Dimensions.get('window');
+const { scale, width } = Dimensions.get("window");
 let iconSize = 22;
 let resultFontSize = 18;
 let weekTextFontSize = 16;
@@ -21,27 +18,26 @@ export default StyleSheet.create({
   },
   ctrl: {
     flex: 1.5,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 15
   },
   result: {
-    flex: 2.5,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
   },
   resultSlash: {
     width: 1 / scale,
-    height: slashLength,
+    height: slashLength
     // transform: [
     //   {
     //     rotateZ: '-45deg'
     //   }
     // ]
   },
-  commonText:{
+  commonText: {
     fontFamily: TEXT_FONT
   },
   resultPart: {
@@ -50,32 +46,32 @@ export default StyleSheet.create({
   resultText: {
     fontSize: resultFontSize,
     marginVertical: 4,
-    fontWeight: 'bold',
-    fontFamily: TEXT_FONT,
+    fontWeight: "bold",
+    fontFamily: TEXT_FONT
   },
   clearText: {
     fontSize: 18,
     fontFamily: TEXT_FONT,
-    fontWeight: '400'
+    fontWeight: "400"
   },
   startText: {
-    textAlign: 'left'
+    textAlign: "left"
   },
   endText: {
-    textAlign: 'left'
+    textAlign: "left"
   },
   week: {
     flex: 1,
     marginTop: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
   },
   weekText: {
     flex: 1,
     fontSize: weekTextFontSize,
-    textAlign: 'center',
-    fontFamily: TEXT_FONT,
+    textAlign: "center",
+    fontFamily: TEXT_FONT
   },
   scroll: {
     flex: 9,
@@ -87,29 +83,29 @@ export default StyleSheet.create({
   },
   btn: {
     flex: 2,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center"
   },
   confirmContainer: {
-    overflow: 'hidden',
-    backgroundColor: 'rgba(255, 255, 255, 0.40)',
+    overflow: "hidden",
+    backgroundColor: "rgba(255, 255, 255, 0.40)",
     borderRadius: 4,
     margin: 10,
     flex: 1,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
+    alignSelf: "stretch",
+    justifyContent: "center"
   },
   confirmContainerDisabled: {
-    backgroundColor: 'rgba(255, 255, 255, 0.20)'
+    backgroundColor: "rgba(255, 255, 255, 0.20)"
   },
   confirmText: {
     fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     fontFamily: TEXT_FONT
   },
   confirmTextDisabled: {
-    color: 'rgba(255, 255, 255, 0.40)'
+    color: "rgba(255, 255, 255, 0.40)"
   },
   closeIcon: {
     width: iconSize,
