@@ -384,7 +384,7 @@ export default class Calendar extends Component {
               </Text>
             </Button>
           ) : (
-            <Button block disabled>
+            <Button block disabled style={{ marginHorizontal: 20, marginVertical: 20 }}>
               <Text
                 ellipsisMode="tail"
                 numberOfLines={1}
