@@ -15,6 +15,7 @@ import {
   Dimensions,
   TouchableHighlight
 } from "react-native";
+import { Button } from "native-base";
 import Moment from "moment";
 import styles from "./CalendarStyle";
 import MonthList from "./MonthList";
@@ -362,46 +363,29 @@ export default class Calendar extends Component {
           </View>
           <View style={styles.btn}>
             {isValid ? (
-              <TouchableHighlight
-                underlayColor="rgba(255, 255, 255, 0.45)"
-                style={[styles.confirmContainer, buttonBack]}
-                onPress={this.confirm}
-              >
-                <View style={styles.confirmBtn}>
-                  <Text
-                    ellipsisMode="tail"
-                    numberOfLines={1}
-                    style={[
-                      styles.confirmText,
-                      { color: "white", padding: 10 }
-                    ]}
-                  >
-                    {this._i18n("save", "text")}
-                  </Text>
-                </View>
-              </TouchableHighlight>
+              <Button onPress={this.confirm}>
+                <Text
+                  ellipsisMode="tail"
+                  numberOfLines={1}
+                  style={[styles.confirmText, { color: "white", padding: 10 }]}
+                >
+                  {this._i18n("save", "text")}
+                </Text>
+              </Button>
             ) : (
-              <View
-                style={[
-                  styles.confirmContainer,
-                  styles.confirmContainerDisabled,
-                  buttonBack
-                ]}
-              >
-                <View style={styles.confirmBtn}>
-                  <Text
-                    ellipsisMode="tail"
-                    numberOfLines={1}
-                    style={[
-                      styles.confirmText,
-                      styles.confirmTextDisabled,
-                      { color: "white" }
-                    ]}
-                  >
-                    {this._i18n("save", "text")}
-                  </Text>
-                </View>
-              </View>
+              <Button disabled>
+                <Text
+                  ellipsisMode="tail"
+                  numberOfLines={1}
+                  style={[
+                    styles.confirmText,
+                    styles.confirmTextDisabled,
+                    { color: "white" }
+                  ]}
+                >
+                  {this._i18n("save", "text")}
+                </Text>
+              </Button>
             )}
           </View>
         </View>
