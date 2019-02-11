@@ -17,7 +17,8 @@ export default StyleSheet.create({
     flex: 1
   },
   ctrl: {
-    flex: 1.5,
+    flex: 1,
+    marginVertical: 5,
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
@@ -111,5 +112,8 @@ export default StyleSheet.create({
     width: iconSize,
     height: iconSize,
     color: "black"
+  },
+  bgBlue: {
+    backgroundColor: "#11A7F7"
   }
 });

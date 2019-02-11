@@ -9,20 +9,16 @@ import {
   View,
   Text,
   Modal,
-  Image,
   StyleSheet,
   ScrollView,
   Dimensions,
   TouchableHighlight
 } from "react-native";
-import { Button } from "native-base";
+import { Button, Icon } from "native-base";
 import Moment from "moment";
 import styles from "./CalendarStyle";
 import MonthList from "./MonthList";
-const ICON = {
-  close:
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAYAAADL1t+KAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAwTSURBVHhe7d27riRJFYbRQUhI8LCMxzwM1pj4OHi8GVR1d/Sc7lOXvERkxN57Lek3UumG8ksvfgEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIDv/nTb32/765cnAHr4y22/3vbnL08w2D3m/7ztf7f95zZRBzjvHvN/33b/tv5+m6gz1MeYt4k6wDkfY94m6gzzKOZtog5wzKOYt4k63b2KeZuoA+zzKuZtok43W2LeJuoA22yJeZuoc9qemLeJOsBre2LeJuocdiTmbaIO8NiRmLeJOrudiXmbqAP86EzM20SdzXrEvE3UAb7qEfM2UeetnjFvE3Wgup4xbxN1nhoR8zZRB6oaEfM2UeeTkTFvE3WgmpExbxN1vrsi5m2iDlRxRczbRJ0v7remPTogoybqQHZXxrztt9so7h7Xe2QfHZBRE3Ugqxkx/+9tf7sNRB2gAzFnCaIOcJyYsxRRB9hPzFmSqANsJ+YsTdQB3hNzQhB1gOfEnFBEHeAzMSckUQf4g5gTmqgDiDlJiDpQmZiTiqgDFYk5KYk6UImYk5qoAxWIOSWIOpCZmFOKqAMZiTkliTqQiZhTmqgDGYg53Ig6EJmYwweiDkQk5vCAqAORiDm8IOpABGIOG4g6sDIxhx1EHViRmMMBog6sRMzhBFEHViDm0IGoAzOJOXQk6sAMYg4DiDpwJTGHgUQduIKYwwVEHRhJzOFCog6MIOYwgagDPYk5TCTqQA9iDgsQdeAMMYeFiDpwhJjDgkQd2EPMYWGiDmwh5hCAqAOviDkEIurAI2IOAYk68JGYQ2CiDtyJOSQg6lCbmEMiog41iTkkJOpQi5hDYqIONYg5FCDqkJuYQyGiDjmJORQk6pCLmENhog45iDkg6hCcmAPfiTrEJObAJ6IOsYg58JSoQwxiDrwl6rA2MQc2E3VYk5gDu4k6rEXMgcNEHdYg5sBpog5ziTnQjajDHGIOdCfqcC0xB4YRdbiGmAPDiTqMJebAZUQdxhBz4HKiDn2JOTCNqEMfYg5MJ+pwjpgDyxB1OEbMgeWIOuwj5sCyRB22EXNgeaIOr4k5EIaow2NiDoQj6vAjMQfCEnX4SsyB8ESd6sQcSEPUqUrMgXREnWrEHEhL1KlCzIH0RJ3sxBwoQ9TJSsyBckSdbMQcKEvUyULMgfJEnejEHOAbUScqMQf4iagTjZgDPCHqRCHmAG+IOqsTc4CNRJ1ViTnATqLOasQc4CBRZxViDnCSqDObmAN0IurMIuYAnYk6VxNzgEFEnauIOcBgos5oYg5wEVFnFDEHuJio05uYA0wi6vQi5gCTiTpniTnAIkSdo8QcYDGizl5iDrAoUWcrMQdYnKjzjpgDBCHqPCPmAMGIOj8Tc4CgRJ1GzAGCE3XEHCAJUa9LzAGSEfV6xBwgKVGvQ8wBkhP1/MQcoAhRz0vMAYoR9XzEHKAoUc9DzAGKE/X4xByAL0Q9LjEH4AeiHo+YA/CQqMch5gC8JOrrE3MANhH1dYk5ALuI+nrEHIBDRH0dYg7AKaI+n5gD0IWozyPmAHQl6tcTcwCGEPXriDkAQ4n6eGIOwCVEfRwxB+BSot6fmAMwhaj3I+YATCXq54k5AEsQ9ePEHICliPp+Yg7AkkR9OzEHYGmi/p6YAxCCqD8n5gCEIuqfiTkAIYn6H8QcgNBEXcwBSKJy1MUcgFQqRl3MAUipUtTFHIDUKkRdzAEoIXPUxRyAUjJGXcwBKClT1MUcgNIyRF3MAeAmctTFHAA+iBh1MQeAByJFXcwB4IUIURdzANhg5aiLOQDssGLUxRwADlgp6mIOACesEHUxB4AOZkZdzAGgo1lRF3MA6GxG1K+cmANQRtaoizkA5WSLupgDUFaWqIs5AOVFj7qYA8A3UaMu5gDwk2hRF3MAeCJK1MUcAN5YPepiDgAbrRp1MQeAnVaLupgDwEGrRF3MAeCk2VEXcwDoZFbUxRwAOppxn/l995+I+88EAHDSrJi3iToAnDQ75m2iDgAHrRLzNlEHgJ1Wi3mbqAPARqvGvE3UAeCN1WPeJuoA8ESUmLeJOgD8JFrM20QdAL6JGvM2UQegvOgxbxN1AMrKEvM2UQegnGwxbxN1AMrIGvM2UQcgvRkxv1+Beo/so3ejJuoApDUr5vf7zO9xFXUAOGlmzBtRB4ATVoh5I+oAcMBKMW9EHQB2WDHmjagDwAYrx7wRdQB4IULMG1EHgAcixbwRdQD4IGLMG1EHgJvIMW9EHYDSMsS8EXUASsoU80bUASglY8wbUQeghMwxb0QdgNQqxLwRdQBSqhTzRtQBSKVizBtRByCFyjFvRB2A0MT8D6IOQEhi/pmoAxCKmD8n6gCEIObviToASxPz7UQdgCWJ+X6iDsBSxPw4UQdgCWJ+nqgDMJWY9yPqAEwh5v2JOgCXEvNxRB2AS4j5eKIOwFBifh1RB2AIMb+eqAPQlZjPI+oAdCHm84k6AKeI+TpEHYBDxHw9og7ALmK+LlEHYBMxX5+oA/CSmMch6gA8JObxiDoAPxDzuEQdgC/EPD5RByhOzPMQdYCixDwfUQcoRszzEnWAIsQ8P1EHSE7M6xB1gKTEvB5RB0hGzOsSdYAkxBxRBwhOzGlEHSAoMednog4QjJjzjKgDBCHmvCPqAIsTc7YSdYBFiTl7iTrAYsSco0QdYBFizlmiDjCZmNOLqANMIub0JuoAFxNzRhF1gIuIOaOJOsBgYs5VRB1gEDHnaqIO0JmYM4uoA3Qi5swm6gAniTmrEHWAg8Sc1Yg6wE5izqpEHWAjMWd1og7whpgThagDPCHmRCPqAD8Rc6ISdYBvxJzoRB0oT8zJQtSBssScbEQdKEfMyUrUgTLEnOxEHUhPzKlC1IG0xJxqRB1IR8ypStSBNMSc6kQdCE/M4StRB8ISc/iRqAPhiDk8JupAGGIOr4k6sDwxh21EHViWmMM+og4sR8zhGFEHliHmcI6oA9OJOfQh6sA0Yg59iTpwOTGHMUQduIyYw1iiDgwn5nANUQeGEXO4lqgD3Yk5zCHqQDdiDnOJOnCamMMaRB04TMxhLaIO7CbmsCZRBzYTc1ibqANviTnEIOrAU2IOsYg68ImYQ0yiDnwn5hCbqANiDkmIOhQm5pCLqENBYg45iToUIuaQm6hDAWIONYg6JCbmUIuoQ0JiDjWJOiQi5lCbqEMCYg7ciToEJubAR6IOAYk58IioQyBiDrwi6hCAmANbiDosTMyBPUQdFiTmwBGiDgsRc+AMUYcFiDnQg6jDRGIO9CTqMIGYAyOIOlxIzIGRRB0uIObAFUQdBhJz4EqiDgOIOTCDqENHYg7MJOrQgZgDKxB1OEHMgZWIOhwg5sCKRB12EHNgZaIOG4g5EIGowwtiDkQi6vCAmAMRiTp8IOZAZKION2IOZCDqlCbmQCaiTkliDmQk6pQi5kBmok4JYg5UIOqkJuZAJaJOSmIOVCTqpCLmQGWiTgpiDiDqBCfmAH8QdUISc4DPRJ1QxBzgOVEnBDEHeE/UWZqYA2wn6ixJzAH2E3WWIuYAx4k6SxBzgPNEnanEHKAfUWeaX297dEBGTcyB7GZE/bfbKO7Pt/1+26MD0ntiDlRxZdT/ddv9Ww6XRF3MgWquiLqY88nIqIs5UNXIqIs5T42IupgD1Y2IupjzVs+oiznAVz2jLuZs1iPqYg7wox5RF3N2OxN1MQd47EzUxZzDjkRdzAFeOxJ1Mee0PVEXc4Bt9kRdzOlmS9TFHGCfLVEXc7p7FXUxBzjmVdTFnGEeRV3MAc55FHUxZ7iPURdzgD4+Rl3Mucz9oP3jNjEH6Oce9futaWIOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPDCL7/8H7AAtFuJwWtdAAAAAElFTkSuQmCC"
-};
+
 export default class Calendar extends Component {
   static propTypes = {
     i18n: PropTypes.string,
@@ -271,17 +267,7 @@ export default class Calendar extends Component {
         onRequestClose={this.close}
       >
         <View style={[styles.container, mainBack]}>
-          <View style={styles.ctrl}>
-            <TouchableHighlight
-              underlayColor="transparent"
-              onPress={this.cancel}
-            >
-              <Image
-                style={styles.closeIcon}
-                source={{ uri: ICON.close }}
-                resizeMode="cover"
-              />
-            </TouchableHighlight>
+          <View style={[styles.ctrl]}>
             {isClearVisible && (
               <TouchableHighlight
                 underlayColor="transparent"
@@ -293,14 +279,21 @@ export default class Calendar extends Component {
                 </Text>
               </TouchableHighlight>
             )}
+            <Icon
+              type="EvilIcons"
+              name="close"
+              style={{ position: "absolute", right: 20 }}
+              onPress={this.cancel}
+            />
           </View>
-          <View style={[styles.result, { marginTop: 10 }]}>
+          <View style={[styles.result, { marginTop: 5 }]}>
             <View
               style={[
                 styles.resultPart,
                 {
                   padding: 10,
-                  borderColor: "grey",
+                  paddingLeft: 20,
+                  borderColor: "#11A7F7",
                   borderWidth: 1,
                   height: this.state.firstView,
                   justifyContent: "center"
@@ -312,7 +305,14 @@ export default class Calendar extends Component {
               >
                 {this._i18n("start", "text") + " " + this._i18n("date", "text")}
               </Text>
-              <Text style={[styles.resultText, styles.startText, subFontColor]}>
+              <Text
+                style={[
+                  styles.resultText,
+                  styles.startText,
+                  subFontColor,
+                  { color: "#11A7F7", fontSize: 20 }
+                ]}
+              >
                 {startDateText || "-- --- ----"}
               </Text>
             </View>
@@ -323,6 +323,7 @@ export default class Calendar extends Component {
                 buttonBack,
                 {
                   padding: 10,
+                  paddingLeft: 20,
                   borderColor: buttonBack.backgroundColor,
                   borderWidth: 1,
                   height: this.state.firstView,
@@ -336,7 +337,11 @@ export default class Calendar extends Component {
                 {this._i18n("end", "text") + " " + this._i18n("date", "text")}
               </Text>
               <Text
-                style={[styles.resultText, styles.endText, { color: "white" }]}
+                style={[
+                  styles.resultText,
+                  styles.endText,
+                  { color: "white", fontSize: 20 }
+                ]}
               >
                 {endDateText || "-- --- ----"}
               </Text>
@@ -361,33 +366,38 @@ export default class Calendar extends Component {
               color={color}
             />
           </View>
-          <View style={styles.btn}>
-            {isValid ? (
-              <Button onPress={this.confirm}>
-                <Text
-                  ellipsisMode="tail"
-                  numberOfLines={1}
-                  style={[styles.confirmText, { color: "white", padding: 10 }]}
-                >
-                  {this._i18n("save", "text")}
-                </Text>
-              </Button>
-            ) : (
-              <Button disabled>
-                <Text
-                  ellipsisMode="tail"
-                  numberOfLines={1}
-                  style={[
-                    styles.confirmText,
-                    styles.confirmTextDisabled,
-                    { color: "white" }
-                  ]}
-                >
-                  {this._i18n("save", "text")}
-                </Text>
-              </Button>
-            )}
-          </View>
+          {isValid ? (
+            <Button
+              block
+              style={[
+                styles.bgBlue,
+                { marginHorizontal: 20, marginVertical: 20 }
+              ]}
+              onPress={this.confirm}
+            >
+              <Text
+                ellipsisMode="tail"
+                numberOfLines={1}
+                style={[styles.confirmText, { color: "white", padding: 10 }]}
+              >
+                {this._i18n("save", "text")}
+              </Text>
+            </Button>
+          ) : (
+            <Button block disabled>
+              <Text
+                ellipsisMode="tail"
+                numberOfLines={1}
+                style={[
+                  styles.confirmText,
+                  styles.confirmTextDisabled,
+                  { color: "white" }
+                ]}
+              >
+                {this._i18n("save", "text")}
+              </Text>
+            </Button>
+          )}
         </View>
       </Modal>
     );
