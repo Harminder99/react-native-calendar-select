@@ -90,6 +90,7 @@ export default class Calendar extends Component {
     this.open = this.open.bind(this);
     this.clear = this.clear.bind(this);
     this.confirm = this.confirm.bind(this);
+
     this._getDateRange();
   }
   componentDidMount () {
@@ -270,7 +271,7 @@ export default class Calendar extends Component {
               <Text style={[styles.resultText, styles.startText, subFontColor]}>
                 {startDateText || "-- --- ----"}
               </Text>
-             
+
             </View>
             {/* <View style={[styles.resultSlash, subBack]}/> */}
             <View style={[styles.resultPart,buttonBack,{padding: 10,borderColor: buttonBack.backgroundColor,borderWidth:1}]}>
@@ -280,7 +281,7 @@ export default class Calendar extends Component {
               <Text style={[styles.resultText, styles.endText, {color: "white"}]}>
                 {endDateText || "-- --- ----"}
               </Text>
-            
+
             </View>
           </View>
           <View style={styles.week}>
